@@ -52,3 +52,15 @@ services:
     app.security.login_form_authenticator:
         class: AppBundle\Security\LoginFormAuthenticator
         autowire: true
+
+    app.service.user_service:
+      class: AppBundle\Service\UserService
+      public: true
+      arguments:
+          - '@app.repository.user_repository'
+
+    app.repository.user_repository:
+        class: AppBundle\Repository\UserRepository
+        factory: ["@doctrine", "getRepository"]
+        arguments:
+            - 'AppBundle:User'
